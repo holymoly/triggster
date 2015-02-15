@@ -1,30 +1,3 @@
-//used pins 2,3,5,6,7,8,9,10,11,13
-//free pins 1
-#define focusPinIn    6
-#define shutterPinIn  7
-
-#define focusPinOut    4
-#define shutterPinOut  12
-
-//Display pins
-#define sclk 13
-#define mosi 11
-#define cs   10
-#define rst  9
-#define dc   8
-
-//Encoder pins
-#define encoder0PinA  2
-#define encoder0PinB  5
-
-#define encoder0PinButton  3
-
-#define focusPinIn    6
-#define shutterPinIn  7
-
-#define focusPinOut    4
-#define shutterPinOut  12
-
 //Display pins
 #define sclk 13
 #define mosi 11

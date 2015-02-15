@@ -6,21 +6,8 @@
 #define focusPinOut    4
 #define shutterPinOut  12
 
-#define externalDigPin  1
+#define externalDigPin  A1
 #define externalAnaPin  A0
-
-//Display pins
-#define sclk 13
-#define mosi 11
-#define cs   10
-#define rst  9
-#define dc   8
-
-//Encoder pins
-#define encoder0PinA  2
-#define encoder0PinB  5
-
-#define encoder0PinButton  3
 
 //Setup routine
 void setup(void) {
