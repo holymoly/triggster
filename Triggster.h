@@ -23,7 +23,7 @@ enum {MenuMode, SelectionMode, EditMode};
 class Triggster
 {
   public:
-    Triggster(int extOutPin,int shutterPin);
+    Triggster(int extOutPin,int shutterPin, int encoderAPin, int encoderBPin, int encoderButtonPin);
     ~Triggster ();
     void encoderRotate(int direction);
     void amountOfMenus(char item);
@@ -33,6 +33,7 @@ class Triggster
     void onButtonPress();
     void trigger(bool ext);
     int  getActiveMode();
+    int  getActiveSelection();
 
     void switchMenu(int direction);     //Change to next menu up or down
     char menuName[_maxStringSize];      // Menu Name
@@ -50,6 +51,9 @@ class Triggster
     //pins
     int _extOutPin;
     int _shutterPin;
+    int _encoderAPin;
+    int _encoderBPin;
+    int _encoderButtonPin;
 
     //Menu Meta Part
     char tempString[_maxStringSize];
