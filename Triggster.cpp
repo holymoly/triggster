@@ -2,7 +2,7 @@
 #include "Triggster.h"
 
 //Constructor
-Triggster::Triggster(int extOutPin,int shutterPin)
+Triggster::Triggster(int extOutPin,int shutterPin, int encoderAPin, int encoderBPin, int encoderButtonPin)
 {
   _activeMenu         = 0;
   _activeMode         = MenuMode;
@@ -14,6 +14,20 @@ Triggster::Triggster(int extOutPin,int shutterPin)
 
   _extOutPin          = extOutPin;
   _shutterPin         = shutterPin;
+  _encoderAPin        = encoderAPin;
+  _encoderBPin        = encoderBPin;
+  _encoderButtonPin   = encoderButtonPin;
+
+  pinMode(_extOutPin, OUTPUT);
+  digitalWrite(_extOutPin, LOW);       // turn on pullup resistor
+  pinMode(_shutterPin, OUTPUT);
+  digitalWrite(_shutterPin, LOW);       // turn on pullup resistor
+  pinMode(_encoderAPin, INPUT);
+  digitalWrite(_encoderAPin, HIGH);       // turn on pullup resistor
+  pinMode(_encoderBPin, INPUT);
+  digitalWrite(_encoderBPin, HIGH);       // turn on pullup resistor
+  pinMode(_encoderButtonPin, INPUT);
+  digitalWrite(_encoderButtonPin, HIGH);       // turn on pullup resistor
 }
 
 //Deconstructor
@@ -21,7 +35,7 @@ Triggster::~Triggster()
 {
 }
 
-//Check if requested menu is higher
+//Check what to do in which mode
 void Triggster::encoderRotate(int direction){
   switch(_activeMode){
     case MenuMode:
@@ -67,7 +81,7 @@ void Triggster::switchSelection(int direction)
     if(_activeSelection == 0){
       _activeSelection = _amountOfValues;
     }else{
-       _activeSelection++;
+       _activeSelection--;
     }
   }
 };
@@ -76,6 +90,12 @@ void Triggster::switchSelection(int direction)
 int Triggster::getActiveMode()
 {
  return _activeMode;
+}
+
+// Returns Active Mode
+int Triggster::getActiveSelection()
+{
+ return _activeSelection;
 }
 // Change Value
 void Triggster::changeValue(int direction)
@@ -112,6 +132,9 @@ void Triggster::changeValue(int direction)
 // Menu Change up or down
 void Triggster::onButtonPress()
 {
+  Serial.print(_activeSelection);
+  Serial.print(":");
+  Serial.println(_amountOfValues);
   //Menu->Selection
   if(_activeMode == MenuMode){
     _activeMode = SelectionMode;
@@ -132,7 +155,6 @@ void Triggster::onButtonPress()
     _activeMode = SelectionMode;
     return;
   }
-
 };
 
 //Get Amount of menus
